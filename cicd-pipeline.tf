@@ -17,6 +17,15 @@ resource "aws_codebuild_project" "tf-plan" {
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "CODEBUILD"
  }
+  environment_variable {
+      name  = "AWS_ACCESS_KEY_ID"
+      value = "AKIAXF35DPVPFHRP4CMH"
+    }
+
+  environment_variable {
+      name  = "AWS_SECRET_ACCESS_KEY"
+      value = "gCrMpZfPRlsTSjcn05Df1SAJzWtnV2YHdqEWtqTK"
+    }
  source {
      type   = "CODEPIPELINE"
      buildspec = file("buildspec/plan-buildspec.yml")
