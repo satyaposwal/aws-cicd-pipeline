@@ -1,3 +1,7 @@
+resource "aws_s3_bucket" "codepipeline_artifacts_sanyam975" {
+  bucket = "pipeline-artifacts-sanyam975"
+} 
+
 resource "aws_codebuild_project" "tf-plan" {
   name          = "tf-cicd-plan2"
   description   = "Plan stage for terraform"
@@ -56,7 +60,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
 
     artifact_store {
         type="S3"
-        location = aws_s3_bucket.codepipeline_artifacts.id
+        location = aws_s3_bucket.codepipeline_artifacts_sanyam975.id
     }
 
     stage {
@@ -69,7 +73,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
             version = "1"
             output_artifacts = ["tf-code"]
             configuration = {
-                FullRepositoryId = "davoclock/aws-cicd-pipeline"
+                FullRepositoryId = "satyaposwal/aws-cicd-pipeline"
                 BranchName   = "master"
                 ConnectionArn = var.codestar_connector_credentials
                 OutputArtifactFormat = "CODE_ZIP"
