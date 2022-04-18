@@ -13,13 +13,9 @@ resource "aws_codebuild_project" "tf-plan" {
 
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "hashicorp/terraform:0.14.3"
+    image                       = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
     type                        = "LINUX_CONTAINER"
-    image_pull_credentials_type = "SERVICE_ROLE"
-    registry_credential{
-        credential = var.dockerhub_credentials
-        credential_provider = "SECRETS_MANAGER"
-    }
+    image_pull_credentials_type = "CODEBUILD"
  }
  source {
      type   = "CODEPIPELINE"
